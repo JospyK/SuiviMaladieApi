@@ -41,4 +41,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Liste Maladie
     Route::apiResource('liste-maladies', 'ListeMaladieApiController');
+
+    // Les maladies d'un patient
+    Route::get('users/{user}/maladies', 'UsersApiController@maladies');
 });

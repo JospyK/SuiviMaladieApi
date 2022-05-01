@@ -25,6 +25,12 @@ class StoreListeMaladieRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'users.*' => [
+                'integer',
+            ],
+            'users' => [
+                'array',
+            ],
         ];
     }
 }

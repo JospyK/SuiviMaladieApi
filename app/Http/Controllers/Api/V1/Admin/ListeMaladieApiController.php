@@ -17,12 +17,13 @@ class ListeMaladieApiController extends Controller
     {
         abort_if(Gate::denies('liste_maladie_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ListeMaladieResource(ListeMaladie::all());
+        return new ListeMaladieResource(ListeMaladie::with(['users'])->get());
     }
 
     public function store(StoreListeMaladieRequest $request)
     {
         $listeMaladie = ListeMaladie::create($request->all());
+        $listeMaladie->users()->sync($request->input('users', []));
 
         return (new ListeMaladieResource($listeMaladie))
             ->response()
@@ -33,12 +34,13 @@ class ListeMaladieApiController extends Controller
     {
         abort_if(Gate::denies('liste_maladie_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ListeMaladieResource($listeMaladie);
+        return new ListeMaladieResource($listeMaladie->load(['users']));
     }
 
     public function update(UpdateListeMaladieRequest $request, ListeMaladie $listeMaladie)
     {
         $listeMaladie->update($request->all());
+        $listeMaladie->users()->sync($request->input('users', []));
 
         return (new ListeMaladieResource($listeMaladie))
             ->response()

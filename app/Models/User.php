@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasMany(Consultation::class, 'medecin_id', 'id');
     }
 
+    public function userListeMaladies()
+    {
+        return $this->belongsToMany(ListeMaladie::class);
+    }
+
     // public function getEmailVerifiedAtAttribute($value)
     // {
     //     return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;

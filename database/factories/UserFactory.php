@@ -59,8 +59,10 @@ class UserFactory extends Factory
             //
         })->afterCreating(function (User $user) {
             $roles = [1, 2];
-            $chosedRoles = array_rand(array_flip($roles), random_int(1,sizeof($roles)-1));
-            $user->roles()->sync($chosedRoles);
+            $user->roles()->sync([2]);
+
+            // $maladies = array_rand(array_flip($roles), random_int(1,sizeof($roles)-1));
+            $user->userListeMaladies()->sync([rand(1,2)]);
         });
     }
 }

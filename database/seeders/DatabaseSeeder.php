@@ -9,6 +9,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            ListeMaladieSeeder::class,
+
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
             PermissionRoleTableSeeder::class,
@@ -23,7 +25,6 @@ class DatabaseSeeder extends Seeder
             TraitementSeeder::class,
             // ExamanSeeder::class,
             InterventionSeeder::class,
-            ListeMaladieSeeder::class,
             SymptomeSeeder::class,
 
         ]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\Admin\ListeMaladieResource;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use Gate;
@@ -13,11 +14,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersApiController extends Controller
 {
+    // public function maladies(User $user)
+    // {
+    //     abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     return new ListeMaladieResource($user->userlis);
+    // }
+
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource(User::with(['roles', 'examens'])->get());
+        return new UserResource(User::with(['roles', 'examens', 'userListeMaladies'])->get());
     }
 
     public function store(StoreUserRequest $request)
@@ -35,7 +43,7 @@ class UsersApiController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource($user->load(['roles', 'examens']));
+        return new UserResource($user->load(['roles', 'examens', 'userListeMaladies']));
     }
 
     public function update(UpdateUserRequest $request, User $user)

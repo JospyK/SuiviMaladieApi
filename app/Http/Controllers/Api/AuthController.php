@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\UserShortResource;
+use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ class AuthController extends Controller
 
             $user = Auth::user();
             $success["accessToken"] = $user->createToken("LaravelSanctumAuth")->plainTextToken;
-            $success["userData"] = new UserShortResource($user);
+            $success["userData"] = new UserResource($user);
             return $this->handleResponse($success, "Utilisateur connecté avec success");
 
         } else {

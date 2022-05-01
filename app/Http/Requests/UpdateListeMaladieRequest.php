@@ -25,6 +25,12 @@ class UpdateListeMaladieRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'users.*' => [
+                'integer',
+            ],
+            'users' => [
+                'array',
+            ],
         ];
     }
 }
